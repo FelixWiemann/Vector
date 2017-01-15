@@ -28,9 +28,9 @@ namespace nepumuk
         private int nDimension;
 
         #region Errormessages
-        private const string DIMENSION_ERROR = "The dimensions of both vectors are not the same, but need to be";
-        private const string ROTATE_ERROR_TOMUCHDIMENSIONS = "can't roatate because too much dimensions";
-        private const string DIMENSION_NOT_THREE = "the dimensions of the vector should be three or two to use this";
+        public const string DIMENSION_ERROR = "The dimensions of both vectors are not the same, but need to be";
+        public const string ROTATE_ERROR_TOMUCHDIMENSIONS = "can't roatate because too much dimensions";
+        public const string DIMENSION_NOT_THREE = "the dimensions of the vector should be three or two to use this";
         #endregion
         #endregion
 
@@ -78,6 +78,7 @@ namespace nepumuk
         /// </summary>
         public int Dimension
         {
+            // TODO create new array, init vals to 0
             set { this.nDimension = value; }
             get { return this.nDimension;}
         }
@@ -654,7 +655,7 @@ namespace nepumuk
         /// <returns></returns>
         public static Vector rotateAroundVector(Vector VectorToRotate, Vector AxisVector, double degrees)
         {
-            // goal: axisvector has to match one of the axis. we choose y-axis because reasons i don't know yet^^
+            // goal: axisvector has to match one of the axis. we choose y-axis because reasons
             // first: rotate around y - axis, so that x component becomes zero
             // second: rotate around x - axis, so that z component becomes zero -> the vector we rotate around becomes y
             double degreesaroundy=0,  degreesaroundx=0;
@@ -724,7 +725,7 @@ namespace nepumuk
         /// <summary>
         /// returns a string-value of the vector 
         /// </summary>
-        /// <param name="form">openingvalue, e.g. "(", "{",...</param>
+        /// <param name="form">openingvalue, eg. "(", "{",...</param>
         /// <param name="seperator">seperatorvalue, e.g. ";"</param>
         /// <returns>string</returns>
         public string ToString(string form, string seperator)
@@ -781,6 +782,7 @@ namespace nepumuk
         {
             return ToString(null, null);
         }
+
         #endregion
     }
 
