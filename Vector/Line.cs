@@ -5,7 +5,7 @@ using System.Text;
 
 namespace nepumuk
 {
-    public struct Line
+    public class Line
     {
 
         #region Vars
@@ -51,7 +51,7 @@ namespace nepumuk
 
         #region get/set
         public Vector ZeroVector
-        {
+        {//TODO rename -> similar to (0,0,0) (origin)
             set { zeroVector = value; }
             get { return zeroVector; }
         }

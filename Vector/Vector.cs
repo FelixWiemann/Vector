@@ -14,7 +14,7 @@ namespace nepumuk
         /// <summary>
         /// contains all values of the vector
         /// </summary>
-        private double[] dValues; // 0: x, 1:y, 2:z
+        private double[] dValues; // 0: x, 1:y, 2:z, ...
         private const double EqualityTolerence = Double.Epsilon;
         public static readonly Vector vX_Axis = new Vector(1, 0, 0);
         public static readonly Vector vY_Axis = new Vector(0, 1, 0);
