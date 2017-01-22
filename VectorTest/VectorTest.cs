@@ -97,7 +97,7 @@ namespace nepumukTest
         }
         [TestMethod()]
         [ExpectedException(typeof(IndexOutOfRangeException))]
-        public void exception_setByIndex()
+        public void exception_getByIndex()
         {
             double i = v3Dim4[4];
         }
@@ -153,7 +153,7 @@ namespace nepumukTest
         }
         [TestMethod()]
         [ExpectedException(typeof(DivideByZeroException))]
-        public void Exception_scalardiv()
+        public void exception_scalardiv()
         {
             Vector res1 = v3Dim1 / 0;
         }
