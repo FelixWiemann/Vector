@@ -5,7 +5,7 @@ using System.Text;
 
 namespace nepumuk
 {
-    class Plane
+    public class Plane
     {
     }
 }

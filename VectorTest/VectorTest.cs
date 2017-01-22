@@ -10,21 +10,44 @@ namespace nepumukTest
 {
     /// <summary>
     /// tested functions:
-    /// - GetDistance(Vector,Vector)
-    /// - + (add)
-    /// - - (subtract)
-    /// - * (scalar mult)
-    /// - SumComponents(Vector)
-    /// - Vector.SumComponents
-    /// - SumSquaredComponents(Vector)
-    /// - Vector.SumSquaredComponents
-    /// - Vector.ToString()
-    /// - Vector.ToString(string,string)
+    /// - Get/Set
+    ///     - 
+    ///     
+    /// - Constructors:
+    ///     - Vector(double[])
+    ///     - Vector(double,double,double)
+    ///     - Vector(double, double)
+    ///     - Vector(Vector)
+    ///     - Vector(int)
+    /// - Vectoroperators
+    ///     - + (add) (v+v)
+    ///     - - (subtract) (v-v)
+    ///     - * (scalar mult) (d*v; v*d)
+    ///     - / (scalar div) (v/d)
+    ///     
+    /// - Calcutils
+    ///     - Vector.getLength(Vector)
+    ///     - SumComponents(Vector)
+    ///     - Vector.SumComponents(Vector)
+    ///     - SumSquaredComponents(Vector)
+    ///     - Vector.SumSquaredComponents(Vector)
+    ///     
+    /// - Rotation
+    ///     - 
+    ///     
+    /// - Calc with dots
+    ///     - GetDistance(Vector,Vector)
     /// 
+    /// - VectorDescription
+    ///     - Vector.ToString()
+    ///     - Vector.ToString(string,string)
     /// </summary>
     [TestClass()]
     public class VectorTest
     {
+        #region vars
+        private const double ALLOWED_DEVIATION_DOUBLE  = 0.0001;
+
         static Vector v3Dim1; // 1,1,1
         static Vector v3Dim2; // 1,2,3
         static Vector v3Dim3; // 1,1,1
@@ -36,7 +59,7 @@ namespace nepumukTest
 
         static Vector v1Dim1; // 1
         static Vector v10Dim1; // 1,1,1,1,1,1,1,1,1,1
-
+        #endregion
         #region init & cleanup
         [ClassInitialize()]
         public static void ClassInit(TestContext context)
@@ -104,6 +127,44 @@ namespace nepumukTest
 
 
         [TestMethod()]
+        public void working_getLength()
+        {
+            double d1 = Vector.getLength(v10Dim1);
+            double d2 = Vector.getLength(v3Dim2);
+            double d3 = Vector.getLength(v2Dim2);
+            Assert.AreEqual(d1, Math.Sqrt(10), "getLength 1");
+            Assert.AreEqual(d2, Math.Sqrt(14), "getLength 2");
+            Assert.AreEqual(d3, Math.Sqrt(10), "getLength 3");
+        }
+
+        [TestMethod()]
+        public void working_Length_get()
+        {
+            double d1 = v10Dim1.Length;
+            double d2 = v3Dim2.Length;
+            double d3 = v2Dim2.Length;
+            Assert.AreEqual(d1, Math.Sqrt(10), "Length 1");
+            Assert.AreEqual(d2, Math.Sqrt(14), "Length 2");
+            Assert.AreEqual(d3, Math.Sqrt(10), "Length 3");
+        }
+        [TestMethod()]
+        public void working_Length_set()
+        {
+
+            double d1 = 5;
+            double d2 = 10;
+            double d3 = 3.5;
+
+            v2Dim2.Length = d1;
+            v2Dim1.Length = d2;
+            v3Dim2.Length = d3;
+
+            Assert.AreEqual(Math.Sqrt(2.5),v2Dim2[0], ALLOWED_DEVIATION_DOUBLE, "Length_set 1");
+            Assert.AreEqual(Math.Sqrt(50), v2Dim1[0], ALLOWED_DEVIATION_DOUBLE, "Length_set 2");
+            Assert.AreEqual(Math.Sqrt(0.875), v3Dim2[0], ALLOWED_DEVIATION_DOUBLE, "Length_set 3");
+        }
+
+        [TestMethod()]
         public void working_GetSet_nComponents()
         {
             
@@ -119,7 +180,7 @@ namespace nepumukTest
                 Assert.AreEqual(d[i], v3Dim4.nComponents[i], "comp 2." + i);
             }
             double[] n = {1,1,1,1,1,1,1};
-            v3Dim4.nComponents = n;
+            v3Dim4.nComponents = n; // setting this, means changing dimension. able to do so? or force user to create new vector
             for (int i = 0; i < n.Length; i++)
             {
                 Assert.AreEqual(d[i], v3Dim4.nComponents[i], "comp 3." + i);
