@@ -11,17 +11,22 @@ namespace nepumukTest
     /// <summary>
     /// tested functions:
     /// - Get/Set
-    ///     - 
-    ///     
+    ///     - nComponents
+    ///     - byIndex
+    ///     - Dimension
+    ///     - X/Y/Z
+    /// -------------------------------------------    
     /// - Constructors:
     ///     - Vector(double[])
     ///     - Vector(double,double,double)
     ///     - Vector(double, double)
     ///     - Vector(Vector)
     ///     - Vector(int)
+    /// ------------------------------------------- 
     /// - Vectoroperators
     ///     - + (add) (v+v)
     ///     - - (subtract) (v-v)
+    ///     - negate (-v)
     ///     - * (scalar mult) (d*v; v*d)
     ///     - / (scalar div) (v/d)
     ///     
@@ -43,6 +48,7 @@ namespace nepumukTest
     ///     - Vector.ToString(string,string)
     /// </summary>
     [TestClass()]
+    
     public class VectorTest
     {
         #region vars
@@ -93,6 +99,110 @@ namespace nepumukTest
             
         }
         #endregion
+
+
+        [TestMethod()]
+        public void working_Negate()
+        {
+            Vector v = -v3Dim1;
+            Vector v2 = -v3Dim4;
+            Assert.AreEqual("(-1;-1;-1)", v.ToString(), "negate");
+            Assert.AreEqual("(-1,5;-3,1;5,3)", v.ToString(), "negate 2");
+        }
+
+
+        [TestMethod()]
+        public void working_GetSetZ()
+        {
+            Assert.AreEqual(1, v3Dim1.Z, "Z 3");
+
+            v3Dim1.Z = 10;
+
+            Assert.AreEqual(10, v3Dim1.nComponents[2], "Z 6");
+        }
+
+        [TestMethod()]
+        [ExpectedException(typeof(ArgumentException))]
+        public void exception_setZ()
+        {
+            v2Dim1.Z = 1.4;
+
+        }
+        [TestMethod()]
+        [ExpectedException(typeof(ArgumentException))]
+        public void exception_getZ()
+        {
+            double d = v2Dim1.Z;
+        }
+
+
+
+        [TestMethod()]
+        public void working_GetSetX()
+        {
+            Assert.AreEqual(1, v1Dim1.X, "X 1");
+            Assert.AreEqual(1, v2Dim1.X, "X 2");
+            Assert.AreEqual(1, v3Dim1.X, "X 3");
+
+            v2Dim1.X = 10;
+            v3Dim1.X = 10;
+            v1Dim1.X = 10;
+
+            Assert.AreEqual(10, v1Dim1.nComponents[0], "X 4");
+            Assert.AreEqual(10, v2Dim1.nComponents[0], "X 5");
+            Assert.AreEqual(10, v3Dim1.nComponents[0], "X 6");
+        }
+
+        [TestMethod()]
+        [ExpectedException(typeof(ArgumentException))]
+        public void exception_setX()
+        {
+            v10Dim1.X = 1.4;
+        }
+        [TestMethod()]
+        [ExpectedException(typeof(ArgumentException))]
+        public void exception_getX()
+        {
+            double d = v10Dim1.X;
+        }
+
+        [TestMethod()]
+        public void working_GetSetY()
+        {
+            Assert.AreEqual(1, v2Dim1.Y, "Y 2");
+            Assert.AreEqual(1, v3Dim1.Y, "Y 3");
+
+            v2Dim1.Y = 10;
+            v3Dim1.Y = 10;
+
+            Assert.AreEqual(10, v2Dim1.nComponents[1], "Y 5");
+            Assert.AreEqual(10, v3Dim1.nComponents[1], "Y 6");
+        }
+
+        [TestMethod()]
+        [ExpectedException(typeof(ArgumentException))]
+        public void exception_setY()
+        {
+            v1Dim1.Y = 1.4;
+            
+        }
+        [TestMethod()]
+        [ExpectedException(typeof(ArgumentException))]
+        public void exception_getY()
+        {
+            double d = v1Dim1.Y;
+        }
+
+
+        [TestMethod()]
+        public void working_getDimension()
+        {
+            Assert.AreEqual(1, v1Dim1.Dimension,"Dimension 1");
+            Assert.AreEqual(2, v2Dim1.Dimension, "Dimension 2");
+            Assert.AreEqual(3, v3Dim1.Dimension, "Dimension 3");
+            Assert.AreEqual(10, v10Dim1.Dimension, "Dimension 4");
+            Assert.AreEqual(12, new Vector(12).Dimension, "Dimension 5");
+        }
 
         [TestMethod()]
         public void working_GetSet_AtIndex()

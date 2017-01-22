@@ -78,8 +78,7 @@ namespace nepumuk
         /// </summary>
         public int Dimension
         {
-            // TODO create new array, init vals to 0
-            set { this.nDimension = value; }
+            // set { this.nDimension = value; } <- not allowed, create new vector instead
             get { return this.nDimension;}
         }
 
@@ -241,16 +240,16 @@ namespace nepumuk
         // add
         public static Vector operator +(Vector v1, Vector v2)
         {
-
+            // Dimensions must be the same
             if (v1.Dimension == v2.Dimension)
             {
+                // create result Vector
                 Vector result = new Vector(v1.nDimension);
-
+                // add each component
                 for (int i = 0; i < v1.Dimension; i++)
                 {
                     result.nComponents[i] = v1.nComponents[i] + v2.nComponents[i];
                 }
-
                 return result;
             }
             else
@@ -258,18 +257,11 @@ namespace nepumuk
                 throw new ArgumentException(DIMENSION_ERROR);
             }
         }
-        /*public static Vector operator +(Vector v)
-        *{
-        *   Vector result = new Vector(v);
-        *   
-        *   return result;
-        *}
-        */
 
-        //subtract
+        // subtract
         public static Vector operator -(Vector v1, Vector v2)
         {
-
+            // dims must be the same
             if (v1.Dimension == v2.Dimension)
             {
                 Vector result = new Vector(v1.Dimension);
@@ -286,6 +278,7 @@ namespace nepumuk
                 throw new ArgumentException(DIMENSION_ERROR);
             }
         }
+        
         public static Vector operator -(Vector v)
         {
             return new Vector(new Vector(v - v) - v);
