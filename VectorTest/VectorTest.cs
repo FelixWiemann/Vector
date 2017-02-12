@@ -29,6 +29,11 @@ namespace nepumukTest
     ///     - negate (-v)
     ///     - * (scalar mult) (d*v; v*d)
     ///     - / (scalar div) (v/d)
+    ///     - == (v,v)
+    ///     - equals (v.equals(object))
+    ///     - ++ (v++)
+    ///     - -- (v--)
+    ///     - != (v!=v)
     ///     
     /// - Calcutils
     ///     - Vector.getLength(Vector)
@@ -100,6 +105,64 @@ namespace nepumukTest
         }
         #endregion
 
+        [TestMethod()]
+        public void working_increment()
+        {
+            Vector v1 = new Vector(1, 0);
+            Vector v2 = new Vector(0, 1);
+            v1++;
+            v2++;
+            v1Dim1++;
+            Assert.AreEqual(v1Dim1.ToString("[",";"),"[2]","incr 1");
+            Assert.AreEqual(v1.ToString("[", ";"), "[2;0]", "incr 2");
+            Assert.AreEqual(v2.ToString("[", ";"), "[0;2]", "incr 3");
+        }
+        [TestMethod()]
+        public void working_decrement()
+        {
+            Vector v1 = new Vector(1, 0);
+            Vector v2 = new Vector(0, 1);
+            v1--;
+            v2--;
+            v1Dim1--;
+            Assert.AreEqual(v1Dim1.ToString("[", ";"), "[0]", "incr 1");
+            Assert.AreEqual(v1.ToString("[", ";"), "[0;0]", "incr 2");
+            Assert.AreEqual(v2.ToString("[", ";"), "[0;0]", "incr 3");
+        }
+
+        [TestMethod()]
+        public void working_Equals()
+        {
+            Object b = new Object();
+            Assert.IsTrue(v10Dim1.Equals(v10Dim1),"equals 1");
+            Assert.IsFalse(v10Dim1.Equals(b), "equals 2");
+            Assert.IsTrue(v2Dim1.Equals(new Vector(1,1)), "equals 3");
+        }
+
+        [TestMethod()]
+        public void working_invertedcomparison()
+        {
+            Assert.IsFalse(v3Dim1 != new Vector(1, 1, 1), "comp 1");
+            Assert.IsFalse(v2Dim1 != new Vector(1, 1), "comp 2");
+            Assert.IsTrue(v2Dim1 != new Vector(1, 2), "comp 3");
+            Assert.IsTrue(v3Dim1 != new Vector(1, 2, 1), "comp 4");
+            Assert.IsFalse(v2Dim1 != new Vector(1, 1 + Vector.EqualityTolerence), "comp 5");
+            Assert.IsTrue(v2Dim1 != new Vector(1, 1 + 2 * Vector.EqualityTolerence), "comp 6");
+            Assert.IsTrue(v3Dim1 != v10Dim1, "comp 7");
+        }
+
+
+        [TestMethod()]
+        public void working_comparison()
+        {
+            Assert.IsTrue(v3Dim1 == new Vector(1, 1, 1),"comp 1");
+            Assert.IsTrue(v2Dim1 == new Vector(1, 1), "comp 2");
+            Assert.IsFalse(v2Dim1 == new Vector(1, 2), "comp 3");
+            Assert.IsFalse(v3Dim1 == new Vector(1, 2,1), "comp 4");
+            Assert.IsTrue(v2Dim1 == new Vector(1, 1 + Vector.EqualityTolerence), "comp 5");
+            Assert.IsFalse(v2Dim1 == new Vector(1, 1 + 2*Vector.EqualityTolerence), "comp 6");
+            Assert.IsFalse(v3Dim1 == v10Dim1, "comp 7");
+        }
 
         [TestMethod()]
         public void working_Negate()
@@ -109,7 +172,6 @@ namespace nepumukTest
             Assert.AreEqual("(-1;-1;-1)", v.ToString(), "negate");
             Assert.AreEqual("(-1,5;-3,1;5,3)", v.ToString(), "negate 2");
         }
-
 
         [TestMethod()]
         public void working_GetSetZ()
@@ -134,8 +196,6 @@ namespace nepumukTest
         {
             double d = v2Dim1.Z;
         }
-
-
 
         [TestMethod()]
         public void working_GetSetX()
